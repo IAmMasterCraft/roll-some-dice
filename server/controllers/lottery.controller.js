@@ -36,10 +36,11 @@ exports.lottery = async (request, response) => {
             amount,
             status,
         });
-        const myUser = await newLotteryUser.save();
+        const beneficiary = await newLotteryUser.save();
         // return response
         return response.status(200).json({
             success: status,
+            beneficiary_status: (beneficiary) ? true : false,
             amount,
             phoneNumber,
         });

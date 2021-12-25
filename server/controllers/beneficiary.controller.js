@@ -10,7 +10,6 @@ exports.beneficiary = async (request, response) => {
         return response.status(200).json({
             success: true,
             beneficiary,
-            phoneNumber,
         });
     } catch (error) {
         return response.status(500).json({
