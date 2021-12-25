@@ -11,6 +11,7 @@ exports.beneficiary = async (request, response) => {
         return response.status(200).json({
             success: true,
             beneficiary: BeneficiaryData(beneficiary),
+            total: beneficiary.length,
         });
     } catch (error) {
         return response.status(500).json({
