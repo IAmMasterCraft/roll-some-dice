@@ -8,10 +8,16 @@ const LotteryUser = new Schema({
         required: true,
         index: { unique: true },
     },
-    token: {
+    fingerprint: {
         type: String,
         required: true,
         index: { unique: true },
+    },
+    amount: {
+        type: Number,
+    },
+    status: {
+        type: Boolean,
     },
     dateGenerated: {
         type: Date,
