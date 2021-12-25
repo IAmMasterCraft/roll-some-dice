@@ -1,7 +1,16 @@
 <template>
   <v-row justify="center" align="center" src="https://picsum.photos/1920/1080?random">
+    <v-progress-circular
+      :size="250"
+      :width="10"
+      indeterminate
+      color="cyan"
+      style="margin: 1rem;"
+      v-if="isProgress"
+    >
+    </v-progress-circular>
     <v-col cols="12" class="my-6">
-      <v-card>
+      <v-card v-if="!isProgress && !isNotify">
         <v-card-title class="headline d-flex justify-center">
           <div class="">
             <v-img
@@ -45,27 +54,40 @@
             </v-container>
           </v-form>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions class="px-6">
           <small>Details provided will be saved sha JSYK</small>
           <v-spacer />
           <v-btn
-            color="primary"
+            color="cyan"
+            @click="Submit"
           >
             Try Your Luck
           </v-btn>
         </v-card-actions>
       </v-card>
       <v-alert 
-      class="my-6"
-      dismissible 
-      color="cyan"
-      border="left"
-      elevation="2"
-      icon="mdi-information-outline"
-      colored-border>
-        {{ total }} 
-        Beneficiar<span v-if="total < 2">y</span><span v-else>ies</span>
-        so far...
+        class="my-6"
+        v-model="isNotify"
+        dismissible 
+        color="yellow"
+        border="left"
+        elevation="2"
+        icon="mdi-fire"
+        v-if="isNotify"
+        colored-border>
+         notifci
+      </v-alert>
+      <v-alert 
+        class="my-6"
+        dismissible 
+        color="cyan"
+        border="left"
+        elevation="2"
+        icon="mdi-information-outline"
+        colored-border>
+          {{ total }} 
+          Beneficiar<span v-if="total < 2">y</span><span v-else>ies</span>
+          so far...
       </v-alert>
       <v-list-item two-line v-for="(beneficiary, index) in beneficiaries" :key="index">
         <v-list-item-content>
@@ -95,9 +117,13 @@
         "mtn",
         "glo",
         "airtel",
+        "9mobile",
       ],
       beneficiaries: [],
       total: 0,
+      progress: 60,
+      isProgress: false,
+      isNotify: true,
     }),
     methods: {
       GetFP(){
@@ -113,12 +139,21 @@
           alert("Cannot Process Request cos something is fishy!");
           return;
         }
-        const tryYourLuck = await this.$axios.$post("/api/giveaway", {
-          phoneNumber: this.phoneNumber,
-          network: this.network,
-          fingerprint: this.fingerprint
-        });
-        console.log(tryYourLuck);
+        
+        try {
+          this.isProgress = true;
+          const tryYourLuck = await this.$axios.$post("/api/giveaway", {
+            phoneNumber: this.phoneNumber,
+            network: this.network,
+            fingerprint: this.fingerprint
+          });
+          console.log(tryYourLuck);
+          this.GetBeneficiary();
+          this.isProgress = false;
+        } catch (error) {
+          // console.log(error.response);
+          this.isProgress = false;
+        }
       }, //end of Submit
       async GetBeneficiary () {
         const allBeneficiaries = await this.$axios.$get("/api/giveaway");

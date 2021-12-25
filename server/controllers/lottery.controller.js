@@ -12,14 +12,14 @@ exports.lottery = async (request, response) => {
         if (!phoneNumber || !network || !fingerprint) {
             return response.status(400).json({
                 success: false,
-                error: "one or more missing fields",
+                message: "one or more missing fields",
             });
         }
         // check eligibility
         const isEligible = await CheckEligibility(phoneNumber, fingerprint, LotteryUser);
         if (!isEligible) return response.status(400).json({
             success: false,
-            error: "Bad vibes received from phone number and/or device!",
+            message: "Bad vibes received from phone number and/or device!",
         });
         // get random amount {between 50 and 200}
         const amount = RandomAmount(50, 200);
@@ -40,9 +40,9 @@ exports.lottery = async (request, response) => {
         // return response
         return response.status(200).json({
             success: status,
-            beneficiary_status: (beneficiary) ? true : false,
-            amount,
-            phoneNumber,
+            message: (status) 
+                ? `₦${amount} successfully delivered to ${phoneNumber}`
+                : `${phoneNumber} no get anything, e  be like say Money don finish...`,
         });
     } catch (error) {
         return response.status(500).json({
