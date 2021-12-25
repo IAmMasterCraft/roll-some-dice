@@ -1,4 +1,5 @@
-const express = require("express");
+const express = require("express"),
+    mongoose = require("mongoose");
 
 // bring in db.js
 const dbConfig = require("./configs/db");
