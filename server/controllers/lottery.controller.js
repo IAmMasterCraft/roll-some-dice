@@ -15,14 +15,14 @@ exports.lottery = async (request, response) => {
             network,
             fingerprint,
         });
-        const myUser = await newLotteryUser.save();
+        // const myUser = await newLotteryUser.save();
         // get random amount
         const amount = RandomAmount();
         // send airtime
         const send = await SendAirtime();
         // update record
-        myUser.amount = amount;
-        myUser.status = send;
+        // myUser.amount = amount;
+        // myUser.status = send;
         // return response
         return response.status(200).json({
             success: send,
