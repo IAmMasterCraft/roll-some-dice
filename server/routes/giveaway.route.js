@@ -14,6 +14,6 @@ router.get("/", defaultControllers);
 router.post("/giveaway", lottery);
 
 /* GET beneficiaries. */
-router.get("/giveaway", lottery);
+router.get("/giveaway", beneficiary);
 
 module.exports = router;

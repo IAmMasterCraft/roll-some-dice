@@ -3,7 +3,10 @@ exports.CheckEligibility = async (
     fingerprint = "hiuyrtersxd978654kjgh",
     LotteryUser
 ) => {
-    const check = await LotteryUser.findOne({ $or: [{ phoneNumber, fingerprint}] });
+    const check = await LotteryUser.findOne().or([
+        { phoneNumber },
+        { fingerprint },
+    ]);
     if (check) return false;
     return true;
 }

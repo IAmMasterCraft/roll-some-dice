@@ -1,15 +1,16 @@
 const imports = require("./imports");
 const { 
     LotteryUser, 
+    BeneficiaryData,
 } = imports;
 
 exports.beneficiary = async (request, response) => {
     try {
-        const beneficiary = await newLotteryUser.find().sort({ dateGenerated: -1 });
+        const beneficiary = await LotteryUser.find().sort({ dateGenerated: -1 });
         // return response
         return response.status(200).json({
             success: true,
-            beneficiary,
+            beneficiary: BeneficiaryData(beneficiary),
         });
     } catch (error) {
         return response.status(500).json({
