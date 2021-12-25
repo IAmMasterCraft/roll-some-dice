@@ -3,7 +3,6 @@ const {
     LotteryUser, 
     BeneficiaryData,
 } = imports;
-
 exports.beneficiary = async (request, response) => {
     try {
         const beneficiary = await LotteryUser.find().sort({ dateGenerated: -1 });

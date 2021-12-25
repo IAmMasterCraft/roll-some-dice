@@ -1,5 +1,3 @@
-const { beneficiary } = require("../controllers/beneficiary.controller");
-
 exports.BeneficiaryData = (beneficiaries = []) => {
     return beneficiaries.map(beneficiary => {
         return {
@@ -11,6 +9,7 @@ exports.BeneficiaryData = (beneficiaries = []) => {
                 )}
             `.replace(/ /g, '').replace(/\n/g, ''),
             amount: beneficiary.amount,
+            dateGenerated: beneficiary.dateGenerated,
         }
     }).filter((beneficiary, index) => index < 5);
 }

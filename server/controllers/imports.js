@@ -4,7 +4,6 @@ const LotteryUser = require("../models/LotteryUser"),
     { SendAirtime } = require("../services/send.airtime"),
     { BeneficiaryData } = require("../services/beneficiary.data");
 
-
 module.exports = {
     LotteryUser,
     CheckEligibility,

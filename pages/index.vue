@@ -55,6 +55,24 @@
           </v-btn>
         </v-card-actions>
       </v-card>
+      <v-alert 
+      class="my-6"
+      dismissible 
+      color="cyan"
+      border="left"
+      elevation="2"
+      icon="mdi-information-outline"
+      colored-border>
+        {{ total }} 
+        Beneficiar<span v-if="total < 2">y</span><span v-else>ies</span>
+        so far...
+      </v-alert>
+      <v-list-item two-line v-for="(beneficiary, index) in beneficiaries" :key="index">
+        <v-list-item-content>
+          <v-list-item-title>{{ beneficiary.phoneNumber }}</v-list-item-title>
+          <v-list-item-subtitle>{{ formatDate(beneficiary.dateGenerated) }}</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
     </v-col>
   </v-row>
 </template>
@@ -79,6 +97,7 @@
         "airtel",
       ],
       beneficiaries: [],
+      total: 0,
     }),
     methods: {
       GetFP(){
@@ -103,12 +122,19 @@
       }, //end of Submit
       async GetBeneficiary () {
         const allBeneficiaries = await this.$axios.$get("/api/giveaway");
-        this.beneficiaries = allBeneficiaries.data.beneficiary;
+        this.beneficiaries = allBeneficiaries.beneficiary;
+        this.total = allBeneficiaries.total;
       }, //end of GetBeneficiary
+      formatDate(str) {
+        const output = new Date(str);
+        const splitted = output.toString().split(" ");
+        // return `${splitted[0]} ${splitted[1]} ${splitted[2]}, ${splitted[3]}`;
+        return `${splitted[1]} ${splitted[2]}, ${splitted[3]}`;
+      }, //end of formatDate
     },
     mounted () {
       this.GetFP();
-      this.GetBeneficiary;
+      this.GetBeneficiary();
     }
   }
 </script>
