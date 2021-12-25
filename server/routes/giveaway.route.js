@@ -5,11 +5,15 @@ const router = Router();
 
 const { defaultControllers } = require("../controllers/default.controller");
 const { lottery } = require("../controllers/lottery.controller");
+const { beneficiary } = require("../controllers/beneficiary.controller");
 
 /* GET home response. */
 router.get("/", defaultControllers);
 
 /* POST form. */
 router.post("/giveaway", lottery);
+
+/* GET beneficiaries. */
+router.get("/giveaway", lottery);
 
 module.exports = router;

@@ -1,5 +1,5 @@
-exports.CheckEligibility = (
-    phoneNumber = 08103412973, 
+exports.CheckEligibility = async (
+    phoneNumber = "08103412973", 
     fingerprint = "hiuyrtersxd978654kjgh",
     LotteryUser
 ) => {
