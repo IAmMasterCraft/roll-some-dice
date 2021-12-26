@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center" align="center" src="https://picsum.photos/1920/1080?random">
+  <v-row justify="center" align="center" src="https://picsum.photos/1920/1080?random" class="animate__animated animate__backInDown">
     <v-progress-circular
       :size="250"
       :width="10"
