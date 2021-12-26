@@ -15,6 +15,7 @@
           <div class="">
             <v-img
               contain
+              class="animate__animated animate__pulse animate__infinite"
               src="https://raw.githubusercontent.com/bedimcode/responsive-christmas-website/main/assets/img/giving1.png"
               max-height="150"
               max-width="150"
@@ -132,6 +133,7 @@
         type: false,
         message: "Maybe something went wrong, I don't even know...",
       },
+      isVisible: 'visible',
     }),
     methods: {
       GetFP(){
