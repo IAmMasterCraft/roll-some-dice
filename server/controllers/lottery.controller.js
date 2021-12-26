@@ -19,7 +19,7 @@ exports.lottery = async (request, response) => {
         const isEligible = await CheckEligibility(phoneNumber, fingerprint, LotteryUser);
         if (!isEligible) return response.status(400).json({
             success: false,
-            message: "Bad vibes received from phone number and/or device!",
+            message: "E be like say you don collect before cos bad vibes was received from your phone number and/or device!",
         });
         // get random amount {between 50 and 200}
         const amount = RandomAmount(50, 200);

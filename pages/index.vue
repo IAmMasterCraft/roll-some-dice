@@ -69,16 +69,17 @@
         class="my-6"
         v-model="isNotify"
         dismissible 
-        color="yellow"
+        :color="(notification.type) ? 'cyan' : 'yellow'"
         border="left"
         elevation="2"
         icon="mdi-fire"
         v-if="isNotify"
         colored-border>
-         notifci
+        {{ notification.message }}
       </v-alert>
       <v-alert 
-        class="my-6"
+      v-model="isBeneficiary"
+        class="mt-15"
         dismissible 
         color="cyan"
         border="left"
@@ -89,12 +90,14 @@
           Beneficiar<span v-if="total < 2">y</span><span v-else>ies</span>
           so far...
       </v-alert>
-      <v-list-item two-line v-for="(beneficiary, index) in beneficiaries" :key="index">
-        <v-list-item-content>
-          <v-list-item-title>{{ beneficiary.phoneNumber }}</v-list-item-title>
-          <v-list-item-subtitle>{{ formatDate(beneficiary.dateGenerated) }}</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
+      <div v-if="isBeneficiary">
+        <v-list-item two-line v-for="(beneficiary, index) in beneficiaries" :key="index">
+          <v-list-item-content>
+            <v-list-item-title>{{ beneficiary.phoneNumber }}</v-list-item-title>
+            <v-list-item-subtitle>{{ formatDate(beneficiary.dateGenerated) }}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </div>
     </v-col>
   </v-row>
 </template>
@@ -123,7 +126,12 @@
       total: 0,
       progress: 60,
       isProgress: false,
-      isNotify: true,
+      isNotify: false,
+      isBeneficiary: true,
+      notification: {
+        type: false,
+        message: "Maybe something went wrong, I don't even know...",
+      },
     }),
     methods: {
       GetFP(){
@@ -147,9 +155,13 @@
             network: this.network,
             fingerprint: this.fingerprint
           });
-          console.log(tryYourLuck);
           this.GetBeneficiary();
+          this.notification = {
+            type: tryYourLuck.success,
+            message: tryYourLuck.message
+          };
           this.isProgress = false;
+          this.isNotify = true;
         } catch (error) {
           // console.log(error.response);
           this.isProgress = false;
