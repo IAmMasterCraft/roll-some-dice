@@ -1,5 +1,6 @@
 const axios = require("axios"),
-    { atob } = require("./a.to.b");
+    { atob } = require("./a.to.b"),
+    LotteryConfigs = require("../models/LotteryConfigs");
 
 exports.SendAirtime = async (dataObject = {
     phone: "08103412973",
@@ -15,6 +16,8 @@ exports.SendAirtime = async (dataObject = {
             ...dataObject
         };
 
+        const lotteryConfig = await LotteryConfigs.findOne({configType: "auth_token"});
+
         const config = {
             method: "POST",
             url: atob(process.env.AIRTIME_ENDPOINT),
@@ -22,7 +25,7 @@ exports.SendAirtime = async (dataObject = {
                 access_token: atob(process.env.ACCESS_TOKEN),
             },
             headers: {
-                Authorization: atob(process.env.TOKEN),
+                Authorization: lotteryConfig.configValue,
             },
             data: payload
         };

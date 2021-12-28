@@ -1,7 +1,8 @@
 require('dotenv').config();
 
 const express = require("express"),
-    mongoose = require("mongoose");
+    mongoose = require("mongoose"),
+    cron = require('node-cron');
 
 // bring in db.js
 const dbConfig = require("./configs/db");
@@ -22,9 +23,15 @@ app.use(express.json());
 mongoose.connect(dbConfig.mongoURI, dbConfig.mongoSetup)
     .then(async () => {
         console.log("MongoDb connected...");
-        await DirechargeLogin();
     })
     .catch(err => console.log(err ?? ''));
+
+// schedule cron job for Direcharge Login
+const job = cron.schedule("0 0 */12 * * *", async () => {
+    await DirechargeLogin();
+});
+
+job.start();
 
 // Import API Routes
 app.use(giveawayRouter);
