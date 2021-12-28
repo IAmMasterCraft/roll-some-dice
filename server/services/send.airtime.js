@@ -10,7 +10,6 @@ exports.SendAirtime = async (dataObject = {
     try {
         const payload = {
             email: "mastercraft@hi2.in",
-            network: "mtn",
             payment_method: "wallet",
             transaction_id: Date.now(),
             ...dataObject

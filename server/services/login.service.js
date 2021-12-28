@@ -24,6 +24,7 @@ exports.DirechargeLogin = async () => {
             configType: "auth_token",
         }, {
             configValue: `Bearer ${token}`,
+            dateUpdated: Date.now(),
         })
         return true;
     } catch (error) {

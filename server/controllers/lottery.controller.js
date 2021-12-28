@@ -21,8 +21,8 @@ exports.lottery = async (request, response) => {
             success: false,
             message: "E be like say you don collect before cos bad vibes was received from your phone number and/or device!",
         });
-        // get random amount {between 50 and 200}
-        const amount = RandomAmount(19, 49);
+        // get random amount {between 51 and 100}
+        const amount = RandomAmount(51, 100);
         // send airtime
         const status = await SendAirtime({
             phone: phoneNumber,
