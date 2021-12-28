@@ -16,7 +16,7 @@ exports.lottery = async (request, response) => {
             });
         }
         // check eligibility
-        const isEligible = await CheckEligibility(phoneNumber, fingerprint, LotteryUser);
+        const isEligible = await CheckEligibility(phoneNumber, fingerprint);
         if (!isEligible) return response.status(400).json({
             success: false,
             message: "E be like say you don collect before cos bad vibes was received from your phone number and/or device!",
@@ -41,8 +41,8 @@ exports.lottery = async (request, response) => {
         return response.status(200).json({
             success: status,
             message: (status) 
-                ? `₦${amount} successfully delivered to ${phoneNumber}`
-                : `${phoneNumber} no get anything, e  be like say Money don finish...`,
+                ? `₦${amount} is on it's way to ${phoneNumber}`
+                : `${phoneNumber} no get anything, Palliative leg don dey shake...`,
         });
     } catch (error) {
         return response.status(500).json({
