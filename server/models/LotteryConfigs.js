@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 //create User Schema
-const LotteryConfig = new Schema({
+const LotteryConfigs = new Schema({
     configType: {
         type: String,
         required: true,
@@ -22,4 +22,4 @@ const LotteryConfig = new Schema({
     },
 });
 
-module.exports = mongoose.model("LotteryConfig", LotteryConfig);
+module.exports = mongoose.model("LotteryConfigs", LotteryConfigs);

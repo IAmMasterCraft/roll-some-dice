@@ -1,4 +1,5 @@
 const LotteryUser = require("../models/LotteryUser"),
+    LotteryConfigs = require("../models/LotteryConfigs"),
     { CheckEligibility } = require("../services/eligibility"),
     { RandomAmount } = require("../services/random.amount"),
     { SendAirtime } = require("../services/send.airtime"),
@@ -6,6 +7,7 @@ const LotteryUser = require("../models/LotteryUser"),
 
 module.exports = {
     LotteryUser,
+    LotteryConfigs,
     CheckEligibility,
     RandomAmount,
     SendAirtime,

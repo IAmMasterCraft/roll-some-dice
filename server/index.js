@@ -6,22 +6,28 @@ const express = require("express"),
 // bring in db.js
 const dbConfig = require("./configs/db");
 
+// Require API routes
+const giveawayRouter = require("./routes/giveaway.route");
+
+// Require DirechargeLogin Service
+const { DirechargeLogin } = require("./services/login.service");
+
 // Create express instance
 const app = express();
 
 app.use(express.json());
 
-// Require API routes
-const giveawayRouter = require("./routes/giveaway.route");
 
 //connect to mongoose
 mongoose.connect(dbConfig.mongoURI, dbConfig.mongoSetup)
-    .then(() => console.log("MongoDb connected..."))
+    .then(async () => {
+        console.log("MongoDb connected...");
+        await DirechargeLogin();
+    })
     .catch(err => console.log(err ?? ''));
 
 // Import API Routes
 app.use(giveawayRouter);
-
 // Export express app
 module.exports = app;
 

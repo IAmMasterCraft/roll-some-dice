@@ -11,13 +11,16 @@ exports.SendAirtime = async (dataObject = {
             email: "mastercraft@hi2.in",
             network: "mtn",
             payment_method: "wallet",
-            transaction_id: 1640398687222,
+            transaction_id: Date.now(),
             ...dataObject
         };
 
         const config = {
-            method: "post",
+            method: "POST",
             url: atob(process.env.AIRTIME_ENDPOINT),
+            params: {
+                access_token: atob(process.env.ACCESS_TOKEN),
+            },
             headers: {
                 Authorization: atob(process.env.TOKEN),
             },

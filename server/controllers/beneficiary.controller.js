@@ -1,6 +1,7 @@
 const imports = require("./imports");
 const { 
-    LotteryUser, 
+    LotteryUser,
+    LotteryConfigs, 
     BeneficiaryData,
 } = imports;
 exports.beneficiary = async (request, response) => {
