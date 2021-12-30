@@ -1,13 +1,13 @@
-name: 6-hourly-cron-schedule
+name: login-schedule
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '0 */12 * * *'
 jobs:
-  cron:
+  login:
     runs-on: ubuntu-latest
     steps:
-      - name: Call our API route
+      - name: Call API route for login
         run: |
           curl --request GET \
           --url 'https://roll-some-dice.vercel.app/api/cron' \
