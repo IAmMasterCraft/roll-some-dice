@@ -1,17 +1,13 @@
 require('dotenv').config();
 
 const express = require("express"),
-    mongoose = require("mongoose"),
-    cron = require('node-cron');
+    mongoose = require("mongoose");
 
 // bring in db.js
 const dbConfig = require("./configs/db");
 
 // Require API routes
 const giveawayRouter = require("./routes/giveaway.route");
-
-// Require DirechargeLogin Service
-const { DirechargeLogin } = require("./services/login.service");
 
 // Create express instance
 const app = express();
@@ -26,12 +22,12 @@ mongoose.connect(dbConfig.mongoURI, dbConfig.mongoSetup)
     })
     .catch(err => console.log(err ?? ''));
 
-// schedule cron job for Direcharge Login
-const job = cron.schedule("0 0 */12 * * *", async () => {
-    await DirechargeLogin();
-});
-
-job.start();
+/**
+ * ======================
+ * CHANGING CRON SCHEDULE
+ * TO GH WORKFLOWS
+ * ======================
+ */
 
 // Import API Routes
 app.use(giveawayRouter);

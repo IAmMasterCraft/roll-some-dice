@@ -26,6 +26,7 @@ exports.DirechargeLogin = async () => {
             configValue: `Bearer ${token}`,
             dateUpdated: Date.now(),
         })
+        console.log("Login Success!");
         return true;
     } catch (error) {
         console.log(error.message);
