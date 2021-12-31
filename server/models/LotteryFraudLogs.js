@@ -5,17 +5,12 @@ const Schema = mongoose.Schema;
 const LotteryFraudLogs = new Schema({
     phoneNumber: {
         type: String,
-        required: true,
-        index: { unique: true },
     },
     network: {
         type: String,
-        required: true,
     },
     fingerprint: {
         type: String,
-        required: true,
-        index: { unique: true },
     },
     amount: {
         type: Number,

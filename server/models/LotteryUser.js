@@ -23,9 +23,10 @@ const LotteryUser = new Schema({
     status: {
         type: Boolean,
     },
-    dateGenerated: {
-        type: Date,
-        default: Date.now(),
+    count: {
+        type: Number,
+        required: true,
+        default: 0,
     },
     dateUpdated: {
         type: Date,
