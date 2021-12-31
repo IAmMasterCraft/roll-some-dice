@@ -120,7 +120,7 @@
           <v-list-item two-line v-for="(beneficiary, index) in beneficiaries" :key="index">
             <v-list-item-content class="animate__animated animate__backInLeft animate__slow">
               <v-list-item-title>{{ beneficiary.phoneNumber }}</v-list-item-title>
-              <v-list-item-subtitle>{{ formatDate(beneficiary.dateGenerated) }}</v-list-item-subtitle>
+              <v-list-item-subtitle v-if="beneficiary.dateGenerated">{{ formatDate(beneficiary.dateGenerated) }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
         </div>

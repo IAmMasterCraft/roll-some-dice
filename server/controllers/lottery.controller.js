@@ -2,7 +2,8 @@ const imports = require("./imports");
 const { 
     LotteryUser, 
     CheckEligibility, 
-    RandomAmount, 
+    RandomAmount,
+    GetMessage, 
     SendAirtime 
 } = imports;
 
@@ -16,10 +17,11 @@ exports.lottery = async (request, response) => {
             });
         }
         // check eligibility
+        const comrade = GetMessage();
         const isEligible = await CheckEligibility(phoneNumber, fingerprint);
         if (!isEligible) return response.status(400).json({
             success: false,
-            message: "Comradeeeee, I see what you're trying to do there. Stopeeeeetttt",
+            message: (comrade.length < 5) ? "Comrade, rest you sef don try" : comrade,
         });
         // get random amount {between 51 and 100}
         const amount = RandomAmount(51, 100);

@@ -11,7 +11,8 @@ exports.CheckEligibility = async (
     ]);
     if (!check) return true;
     const doubleLotteryUser = new LotteryFraudLogs({
-        ...check
+        phoneNumber,
+        fingerprint,
     });
     await doubleLotteryUser.save();
     return false;

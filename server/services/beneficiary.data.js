@@ -1,5 +1,6 @@
 exports.BeneficiaryData = (beneficiaries = []) => {
     return beneficiaries.map(beneficiary => {
+        // console.log(beneficiary.dateGenerated);
         return {
             phoneNumber: `
                 ${beneficiary.phoneNumber.substring(0, 3)}
